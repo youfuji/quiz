@@ -26,6 +26,16 @@ async def auth_page():
         html_content = file.read()
     return HTMLResponse(content=html_content)
 
+
+# quiz_add.html の表示 (GET)
+@app.get("/add", response_class=HTMLResponse)
+async def add_page():
+    # auth.html を返す
+    file_path = os.path.join("templates", "quiz_add.html")
+    with open(file_path, "r", encoding="utf-8") as file:
+        html_content = file.read()
+    return HTMLResponse(content=html_content)
+
 # フォームデータの送信 (POST)
 @app.post("/submit")
 async def submit_form(name: str = Form(...), password: str = Form(...)):
