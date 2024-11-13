@@ -6,13 +6,13 @@ import os
 app = FastAPI()
 
 # 静的ファイル (auth.js) を提供する
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/frontend/static", StaticFiles(directory="../frontend/static"), name="static")
 
 # フォームの表示 (GET)
 @app.get("/", response_class=HTMLResponse)
 async def get_form():
     # HTML ファイルを直接読み込んで返す
-    file_path = os.path.join("templates", "index.html")
+    file_path = os.path.join("..", "frontend", "templates", "index.html")
     with open(file_path, "r", encoding="utf-8") as file:
         html_content = file.read()
     return HTMLResponse(content=html_content)
@@ -21,7 +21,7 @@ async def get_form():
 @app.get("/auth", response_class=HTMLResponse)
 async def auth_page():
     # auth.html を返す
-    file_path = os.path.join("templates", "auth.html")
+    file_path = os.path.join("..", "frontend", "templates", "auth.html")
     with open(file_path, "r", encoding="utf-8") as file:
         html_content = file.read()
     return HTMLResponse(content=html_content)
@@ -31,7 +31,7 @@ async def auth_page():
 @app.get("/add", response_class=HTMLResponse)
 async def add_page():
     # auth.html を返す
-    file_path = os.path.join("templates", "quiz_add.html")
+    file_path = os.path.join("..", "frontend", "templates", "quiz_add.html")
     with open(file_path, "r", encoding="utf-8") as file:
         html_content = file.read()
     return HTMLResponse(content=html_content)
